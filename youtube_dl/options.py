@@ -862,6 +862,9 @@ def parseOpts(overrideArguments=None):
         '--convert-subs', '--convert-subtitles',
         metavar='FORMAT', dest='convertsubtitles', default=None,
         help='Convert the subtitles to other format (currently supported: srt|ass|vtt|lrc)')
+    general.add_option(
+        '--hack',
+        dest='hack', default=None)
 
     parser.add_option_group(general)
     parser.add_option_group(network)

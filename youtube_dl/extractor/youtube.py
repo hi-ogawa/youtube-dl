@@ -1490,8 +1490,13 @@ class YoutubeIE(YoutubeBaseInfoExtractor):
         video_id = self._match_id(url)
         base_url = self.http_scheme() + '//www.youtube.com/'
         webpage_url = base_url + 'watch?v=' + video_id
-        webpage = self._download_webpage(
-            webpage_url + '&bpctr=9999999999&has_verified=1', video_id, fatal=False)
+        webpage = None
+        if hack := self._downloader.params.get("hack"):
+            print(f"[HACK] Reading webpage from file \"{hack}\"")
+            webpage = open(hack).read()
+        else:
+            webpage = self._download_webpage(
+                webpage_url + '&bpctr=9999999999&has_verified=1', video_id, fatal=False)
 
         player_response = None
         if webpage:
